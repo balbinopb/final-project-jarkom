@@ -22,7 +22,7 @@
     <tr>
       <td>3</td>
       <td>Muhammad Zayyaad Azizan</td>
-      <td>HTTP Client development & system testing (STO)</td>
+      <td>HTTP Client development & system testing</td>
     </tr>
   </tbody>
 </table>
