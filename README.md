@@ -1,3 +1,6 @@
+<h1>FINAL PROJECT COMPUTER NETWORK</h1>
+<thead></thead>
+
 <h2>👥 Group Members</h2>
 
 <table>
