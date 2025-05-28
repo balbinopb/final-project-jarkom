@@ -1,57 +1,62 @@
-import socket
-import webbrowser
-import tempfile
-import os
+import sys       # For accessing command-line arguments
+import socket    # For creating TCP socket connections
 
-def http_client():
-    host = "127.0.0.1"  # input("Enter server host (ex, 127.0.0.1): ")
-    port = "8080"       # input("Enter server port (ex, 8080): ")
-    filename = "index2.html"  # input("Enter filename (ex, index.html): ")
+def client():
+    
+    # Check for the correct number of command-line arguments
+    if len(sys.argv) != 4:
+        print("Usage: client.py <server_host> <server_port> <filename>")
+        sys.exit(1)
+
+    # Extract arguments: server IP/hostname, port, and requested filename
+    server_host = sys.argv[1]          # e.g., "127.0.0.1"
+    server_port = int(sys.argv[2])     # e.g., 1234
+    filename = sys.argv[3]             # e.g., "index.html"
+
+    # Create a TCP socket (IPv4, TCP)
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
-        port = int(port)
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-            client_socket.connect((host, port))
+        # Connect the client socket to the server's IP and port
+        client_socket.connect((server_host, server_port))
 
-            # Send HTTP GET request
-            request = f"GET /{filename} HTTP/1.0\r\nHost: {host}\r\n\r\n"
-            client_socket.sendall(request.encode())
+        # Create a valid HTTP GET request
+        request = f"GET /{filename} HTTP/1.1\r\nHost: {server_host}\r\n\r\n"
 
-            # Receive response
-            response = b""
-            while True:
-                data = client_socket.recv(1024)
-                if not data:
-                    break
-                response += data
+        # Send the HTTP request to the server
+        client_socket.sendall(request.encode())
 
-        # Decode response with error handling
-        response_str = response.decode(errors='replace')
+        # Receive the full response from the server in chunks
+        response = b""  # Store raw bytes
+        while True:
+            chunk = client_socket.recv(1024)  # Read 1024-byte chunks
+            if not chunk:  # No more data
+                break
+            response += chunk  # Append received data
 
-        # Find header-body separator
-        separator = "\r\n\r\n"
-        header_end = response_str.find(separator)
-        if header_end == -1:
-            print("Invalid HTTP response")
-            return
+        # Decode the full byte response to text (UTF-8 by default)
+        response_text = response.decode()
 
-        # Extract HTML content after headers
-        html_content = response_str[header_end + len(separator):]
+        # Extract the first line of the HTTP response (status line)
+        status_line = response_text.splitlines()[0]  # e.g., "HTTP/1.1 200 OK"
 
-        # Save HTML content to a temporary file
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".html", mode='w', encoding='utf-8') as tmp_file:
-            tmp_file.write(html_content)
-            temp_file_path = tmp_file.name
+        # Check the status line and print result accordingly
+        if "200 OK" in status_line:
+            # If successful, print the full URL as output
+            print(f"http://{server_host}:{server_port}/{filename}")
+        else:
+            # If failed (e.g., 404), show the status line as error
+            print("Error from server:")
+            print(status_line)
 
-        print(f"\n--- Server Response Succes ---")
-
-        # Open the temp file in default browser
-        webbrowser.open(f"file://{os.path.abspath(temp_file_path)}")
-
-    except ValueError:
-        print("Port must be a number.")
     except Exception as e:
-        print(f"Connection error: {e}")
+        # Handle connection or socket errors
+        print(f"[!] Connection error: {e}")
 
+    finally:
+        # Always close the socket after use
+        client_socket.close()
+
+# Standard Python entry point
 if __name__ == "__main__":
-    http_client()
+    client()
