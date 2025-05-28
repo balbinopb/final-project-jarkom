@@ -2,7 +2,7 @@ import sys       # For accessing command-line arguments
 import socket    # For creating TCP socket connections
 
 def client():
-    
+
     # Check for the correct number of command-line arguments
     if len(sys.argv) != 4:
         print("Usage: client.py <server_host> <server_port> <filename>")
@@ -43,7 +43,7 @@ def client():
         # Check the status line and print result accordingly
         if "200 OK" in status_line:
             # If successful, print the full URL as output
-            print(f"http://{server_host}:{server_port}/{filename}")
+            print(f"it is succes please run -> http://{server_host}:{server_port}/{filename} on the browser to see the result")
         else:
             # If failed (e.g., 404), show the status line as error
             print("Error from server:")
