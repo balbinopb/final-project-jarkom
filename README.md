@@ -1,6 +1,6 @@
 <h1 align="center">🖧 FINAL PROJECT - COMPUTER NETWORK</h1>
 
-<h2>👥 Group Members</h2>
+<h2>Group Members</h2>
 
 <table>
   <thead>
@@ -31,7 +31,7 @@
 
 ---
 
-<h2>🚀 How to Run</h2>
+<h2>How to Run</h2>
 
 <ol>
   <li>Make sure you have <strong>Python 3</strong> installed.</li>
@@ -51,9 +51,9 @@
 <code>python3 http_client.py</code>
 </pre>
 
-> ⚠️ Make sure the server is running before executing the client.
+> Make sure the server is running before executing the client.
 >
-> 💡 Check your firewall or port settings if the client fails to connect.
+> Check your firewall or port settings if the client fails to connect.
 
 ---
 
