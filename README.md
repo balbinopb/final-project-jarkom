@@ -1,5 +1,4 @@
-<h1>FINAL PROJECT COMPUTER NETWORK</h1>
-<thead></thead>
+<h1 align="center">🖧 FINAL PROJECT - COMPUTER NETWORK</h1>
 
 <h2>👥 Group Members</h2>
 
@@ -27,9 +26,46 @@
       <td>Muhammad Zayyaad Azizan</td>
       <td>HTTP Client development & system testing</td>
     </tr>
-    
   </tbody>
 </table>
 
-<thead></thead>
-<td>how to run:</td>
+---
+
+<h2>🚀 How to Run</h2>
+
+<ol>
+  <li>Make sure you have <strong>Python 3</strong> installed.</li>
+  <li>Clone this repository or download the ZIP.</li>
+  <li>Open your terminal and navigate to the project directory.</li>
+  <li>Run the appropriate file based on what you want to test:</li>
+</ol>
+
+<pre>
+<b>Single-threaded server:</b>
+<code>python3 single_thread_server.py</code>
+
+<b>Multi-threaded server:</b>
+<code>python3 multi_thread_server.py</code>
+
+<b>HTTP client:</b>
+<code>python3 http_client.py</code>
+</pre>
+
+> ⚠️ Make sure the server is running before executing the client.
+>
+> 💡 Check your firewall or port settings if the client fails to connect.
+
+---
+
+<h2>📁 Project Structure</h2>
+
+<pre>
+.
+├── multi_thread_server.py
+├── single_thread_server.py
+├── http_client.py
+└── README.md
+</pre>
+
+---
+
