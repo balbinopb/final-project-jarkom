@@ -48,7 +48,7 @@
 <code>python3 multi_thread_server.py</code>
 
 <b>HTTP client:</b>
-<code>python3 http_client.py server_host server_port filename.html</code>
+<code>python3 http_client.py <server_host> <server_port> <filename.html></code>
 </pre>
 
 > Make sure the server is running before executing the client.
