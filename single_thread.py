@@ -15,7 +15,7 @@ def handle_client_connection(connection_socket):
 
         # Ambil nama file dari request
         request_line = request_data.splitlines()[0]
-        filename = request_line.split()[1][1:]  # buang slash di depan
+        filename = request_line.split()[1][1:] 
 
         if os.path.isfile(filename):
             # Buka dan baca isi file
@@ -43,7 +43,7 @@ def handle_client_connection(connection_socket):
         print("Error handling request:", e)
     finally:
         connection_socket.close()
-
+        
 def main():
     server_port = PORT  #port
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
